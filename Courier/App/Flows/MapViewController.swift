@@ -9,29 +9,15 @@
 import UIKit
 import GoogleMaps
 import CoreLocation
+import RealmSwift
 
 /// Контроллер карты
 public class MapViewController: UIViewController {
     
+    private var route: GMSPolyline?
+    private var routePath: GMSMutablePath?
+    
     @IBOutlet private weak var mapView: GMSMapView!
-    
-    /// Кнопка включения (выключения) отслеживания текущего  местоположения
-    @IBOutlet private weak var myLocationButton: UIButton!
-    
-    /// Обрабатывает нажатие на кнопку включения (выключения)
-    /// отслеживания текущего  местоположения
-    @IBAction func myLocationButtonTap(_ sender: Any) {
-        locationManager?.requestLocation()
-        if Session.instance.isMyLocationUpdating {
-            locationManager?.stopUpdatingLocation()
-            myLocationButton.setImage(UIImage(named: "map_my_location_button_icon"), for: .normal)
-            Session.instance.isMyLocationUpdating = false
-        } else {
-            locationManager?.startUpdatingLocation()
-            myLocationButton.setImage(UIImage(named: "map_my_location_on_icon"), for: .normal)
-            Session.instance.isMyLocationUpdating = true
-        }
-    }
     
     private var locationManager: CLLocationManager?
     
@@ -47,6 +33,60 @@ public class MapViewController: UIViewController {
         guard (Session.instance.mapZoomLevel - kGMSMinZoomLevel) >= 1 else { return }
         Session.instance.mapZoomLevel -= 1
         mapView.animate(toZoom: Session.instance.mapZoomLevel)
+    }
+    
+    /// Обрабатывает нажатие на кнопку Начать трек
+    @IBAction private func onStartTrackTap(_ sender: Any) {
+        self.route?.map = nil
+        self.route = GMSPolyline()
+        self.route?.strokeWidth = 4
+        self.route?.strokeColor = UIColor.blue
+        self.routePath = GMSMutablePath()
+        self.route?.map = self.mapView
+        Session.instance.isMyLocationUpdating = true
+        locationManager?.startUpdatingLocation()
+    }
+    
+    /// Обрабатывает нажатиие на кнопку Закончить трек
+    @IBAction private func onEndTrackTap(_ sender: Any) {
+        DatabaseService.deleteData(type: Path.self)
+        DatabaseService.saveData(data: Path(path:self.routePath!))
+        Session.instance.isMyLocationUpdating = false
+        locationManager?.stopUpdatingLocation()
+    }
+    
+    /// Обрабатывает нажатие на кнопку Отобразить предыдущий трек
+    @IBAction func onPreviousTrackTap(_ sender: Any) {
+        if Session.instance.isMyLocationUpdating {
+            self.showAlert(title: "Attention", message: "The current track will be finished", withCancel: true) { action in
+                Session.instance.isMyLocationUpdating = false
+                self.locationManager?.stopUpdatingLocation()
+                self.drawPreviousPath()
+            }
+        } else {
+            self.drawPreviousPath()
+        }
+    }
+    
+    private func drawPreviousPath() {
+        
+        guard let pathResults = DatabaseService.getData(type: Path.self),
+            let encodedPath = pathResults.first?.encodedPath,
+            let path = GMSMutablePath(fromEncodedPath: encodedPath) else { return }
+        
+        self.route?.map = nil
+
+        self.routePath = path
+        self.route = GMSPolyline(path: path)
+        self.route?.strokeWidth = 4
+        self.route?.strokeColor = UIColor.brown
+        self.route?.map = self.mapView
+        
+        var bounds = GMSCoordinateBounds()
+        for index in 1...path.count() {
+            bounds = bounds.includingCoordinate(path.coordinate(at: index))
+        }
+        mapView.animate(with: GMSCameraUpdate.fit(bounds))
     }
     
     override public func viewDidLoad() {
@@ -66,7 +106,12 @@ public class MapViewController: UIViewController {
     /// Конфигурирует менеджер отслежииваниия местоположения
     private func configureLocationManager() {
         locationManager = CLLocationManager()
-        locationManager?.requestWhenInUseAuthorization()
+        locationManager?.allowsBackgroundLocationUpdates = true
+        locationManager?.pausesLocationUpdatesAutomatically = false
+        locationManager?.startMonitoringSignificantLocationChanges()
+        locationManager?.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager?.requestAlwaysAuthorization()
+        locationManager?.requestAlwaysAuthorization()
         locationManager?.delegate = self
     }
 }
@@ -74,10 +119,12 @@ public class MapViewController: UIViewController {
 // MARK: - Содержит реализацию методов CLLocationManagerDelegate
 extension MapViewController: CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let coordinate = locations.first?.coordinate else {
-            return
-        }
-        addMarker(coordinate: coordinate)
+        guard Session.instance.isMyLocationUpdating,
+            let location = locations.last else {return}
+        self.routePath?.add(location.coordinate)
+        self.route?.path = self.routePath
+        let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: Session.instance.mapZoomLevel)
+        mapView.animate(to: position)
     }
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         self.showAlert(error: error)

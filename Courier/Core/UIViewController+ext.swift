@@ -25,12 +25,12 @@ extension UIViewController {
     ///
     /// - Parameter error: строка с ошибкой
     func showAlert(error: String) {
-        let alter = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        let alertVC = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
         let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
         
-        alter.addAction(action)
+        alertVC.addAction(action)
         
-        present(alter, animated: true, completion: nil)
+        present(alertVC, animated: true, completion: nil)
     }
     
     /// Выводит окно с сообщением
@@ -39,12 +39,12 @@ extension UIViewController {
     ///   - title: строка с заголовком окна
     ///   - message: строка с сообщением
     func showAlert(title: String, message: String) {
-        let alter = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
         
-        alter.addAction(action)
+        alertVC.addAction(action)
         
-        present(alter, animated: true, completion: nil)
+        present(alertVC, animated: true, completion: nil)
     }
     
     /// Выводит окно с сообщением ии выполняет некоторые действиия после нажатия кнопки Ок
@@ -52,13 +52,18 @@ extension UIViewController {
     /// - Parameters:
     ///   - title: строка с заголовком окно
     ///   - message: строка с сообщением
+    ///   - withCancel: флаг наличия кнопки Отмена, по-умолчаниию - false
     ///   - handler: обработчик нажатия кнопки Ок
-    func showAlert(title: String, message: String, handler: @escaping (UIAlertAction)->Void) {
-        let alter = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ok", style: .cancel, handler: handler)
+    func showAlert(title: String, message: String, withCancel: Bool = false, handler: @escaping (UIAlertAction)->Void) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "Ok", style: .destructive, handler: handler)
         
-        alter.addAction(action)
+        alertVC.addAction(confirmAction)
         
-        present(alter, animated: true, completion: nil)
+        if withCancel {
+            alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        }
+        
+        present(alertVC, animated: true, completion: nil)
     }
 }

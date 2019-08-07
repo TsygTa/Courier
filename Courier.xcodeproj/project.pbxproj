@@ -15,6 +15,8 @@
 		3FC2010922F0CFE800911608 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FC2010722F0CFE800911608 /* LaunchScreen.storyboard */; };
 		3FC2011422F0CFE800911608 /* CourierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC2011322F0CFE800911608 /* CourierTests.swift */; };
 		3FC2011F22F0CFE800911608 /* CourierUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC2011E22F0CFE800911608 /* CourierUITests.swift */; };
+		3FD3D33122F9C1F4003D98DA /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3D33022F9C1F4003D98DA /* DatabaseService.swift */; };
+		3FD3D33322FB630C003D98DA /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3D33222FB630C003D98DA /* Path.swift */; };
 		3FE2377722F0FFA6003BC736 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE2377622F0FFA6003BC736 /* Session.swift */; };
 		3FE2377922F10EA1003BC736 /* UIViewController+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE2377822F10EA1003BC736 /* UIViewController+ext.swift */; };
 		61956AA99140E381083803C5 /* Pods_Courier.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C1052BC5AD7A3CE8FCA0648 /* Pods_Courier.framework */; };
@@ -54,6 +56,8 @@
 		3FC2011A22F0CFE800911608 /* CourierUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CourierUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FC2011E22F0CFE800911608 /* CourierUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourierUITests.swift; sourceTree = "<group>"; };
 		3FC2012022F0CFE800911608 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FD3D33022F9C1F4003D98DA /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		3FD3D33222FB630C003D98DA /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		3FE2377622F0FFA6003BC736 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		3FE2377822F10EA1003BC736 /* UIViewController+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ext.swift"; sourceTree = "<group>"; };
 		588C5128E1FCDB4CCE8C21A8 /* Pods-CourierTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourierTests.release.xcconfig"; path = "Target Support Files/Pods-CourierTests/Pods-CourierTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -144,10 +148,36 @@
 			path = CourierUITests;
 			sourceTree = "<group>";
 		};
+		3FD3D32B22F9BEF5003D98DA /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				3FD3D33022F9C1F4003D98DA /* DatabaseService.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		3FD3D32E22F9C148003D98DA /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				3FD3D33222FB630C003D98DA /* Path.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		3FD3D32F22F9C160003D98DA /* BusinessLogic */ = {
+			isa = PBXGroup;
+			children = (
+				3FD3D32B22F9BEF5003D98DA /* Database */,
+			);
+			path = BusinessLogic;
+			sourceTree = "<group>";
+		};
 		3FE2377222F0E3F7003BC736 /* App */ = {
 			isa = PBXGroup;
 			children = (
 				3FC200FE22F0CFE600911608 /* AppDelegate.swift */,
+				3FD3D32F22F9C160003D98DA /* BusinessLogic */,
+				3FD3D32E22F9C148003D98DA /* Entity */,
 				3FE2377322F0E450003BC736 /* Flows */,
 			);
 			path = App;
@@ -215,6 +245,7 @@
 				3FC200F822F0CFE600911608 /* Frameworks */,
 				3FC200F922F0CFE600911608 /* Resources */,
 				88C5BB7A0CDEC443880CE134 /* [CP] Copy Pods Resources */,
+				66AB5069C9A3FE2FFECBDD28 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -234,6 +265,7 @@
 				3FC2010C22F0CFE800911608 /* Frameworks */,
 				3FC2010D22F0CFE800911608 /* Resources */,
 				81F24C68A02776ACBE8D6D57 /* [CP] Copy Pods Resources */,
+				718DD6A941918EF4126FA33B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -254,6 +286,7 @@
 				3FC2011722F0CFE800911608 /* Frameworks */,
 				3FC2011822F0CFE800911608 /* Resources */,
 				E600B6D5407B9A79E8ACD831 /* [CP] Copy Pods Resources */,
+				F776389826432E1FC61DE5EE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -277,6 +310,11 @@
 				TargetAttributes = {
 					3FC200FA22F0CFE600911608 = {
 						CreatedOnToolsVersion = 10.3;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					3FC2010E22F0CFE800911608 = {
 						CreatedOnToolsVersion = 10.3;
@@ -380,6 +418,54 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		66AB5069C9A3FE2FFECBDD28 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Courier/Pods-Courier-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Courier/Pods-Courier-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		718DD6A941918EF4126FA33B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CourierTests/Pods-CourierTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CourierTests/Pods-CourierTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		81F24C68A02776ACBE8D6D57 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -468,6 +554,30 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CourierUITests/Pods-CourierUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F776389826432E1FC61DE5EE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CourierUITests/Pods-CourierUITests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CourierUITests/Pods-CourierUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -475,6 +585,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FD3D33122F9C1F4003D98DA /* DatabaseService.swift in Sources */,
+				3FD3D33322FB630C003D98DA /* Path.swift in Sources */,
 				3FC2010122F0CFE600911608 /* MapViewController.swift in Sources */,
 				3FC200FF22F0CFE600911608 /* AppDelegate.swift in Sources */,
 				3FE2377922F10EA1003BC736 /* UIViewController+ext.swift in Sources */,
