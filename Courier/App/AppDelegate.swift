@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +16,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        GMSServices.provideAPIKey("AIzaSyD547ofIG8E0Dj7CkUJzqfwHMSwLERqmY8")
+        
+        let controller: UIViewController
+        
+        if UserDefaults.standard.bool(forKey: "isLogin") {
+            controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(MainViewController.self)
+        } else {
+            controller = UIStoryboard(name: "Auth", bundle: nil).instantiateViewController(LoginViewController.self)
+        }
+        window = UIWindow()
+        window?.rootViewController = UINavigationController(rootViewController: controller)
+        window?.makeKeyAndVisible()
+        
         return true
     }
 
