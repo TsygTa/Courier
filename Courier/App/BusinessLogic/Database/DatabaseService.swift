@@ -16,7 +16,7 @@ public class DatabaseService {
             print(config.fileURL ?? "")
             let realm = try Realm(configuration: config)
             realm.beginWrite()
-            realm.add(data)
+            realm.add(data, update: .all)
             try realm.commitWrite()
         } catch {
             print(error)

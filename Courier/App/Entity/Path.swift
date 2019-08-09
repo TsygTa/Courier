@@ -10,10 +10,15 @@ import Foundation
 import RealmSwift
 import GoogleMaps
 
+/// Класс маршрута
 public class Path: Object {
     
+    @objc dynamic var id: Int = 1
     @objc dynamic var encodedPath: String = ""
     
+    override public static func primaryKey() -> String? {
+        return "id"
+    }
     convenience init(path: GMSMutablePath) {
         self.init()
         self.encodedPath = path.encodedPath()

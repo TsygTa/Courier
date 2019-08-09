@@ -18,5 +18,8 @@ public class Session {
     /// Текущий масштаб карты
     var mapZoomLevel: Float = 17
     
+    /// Авторизовавшиийся пользователь
+    var user: User?
+    
     private init() {}
 }

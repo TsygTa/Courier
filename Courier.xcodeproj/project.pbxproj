@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		1D51CA847CF8F39CED099DB9 /* Pods_CourierUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811A424EB1E3ED9784AA0D53 /* Pods_CourierUITests.framework */; };
+		3F353AFF22FC0AF400BEBE61 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F353AFE22FC0AF400BEBE61 /* User.swift */; };
+		3F353B0822FC15BC00BEBE61 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F353B0722FC15BC00BEBE61 /* Auth.storyboard */; };
+		3F353B0A22FC16B100BEBE61 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F353B0922FC16B100BEBE61 /* LoginViewController.swift */; };
+		3F353B0C22FC16D900BEBE61 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F353B0B22FC16D900BEBE61 /* SignUpViewController.swift */; };
+		3F353B0E22FD6A2500BEBE61 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F353B0D22FD6A2500BEBE61 /* MainViewController.swift */; };
+		3F353B1122FD88E600BEBE61 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F353B1022FD88E600BEBE61 /* BaseRouter.swift */; };
 		3FC200FF22F0CFE600911608 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC200FE22F0CFE600911608 /* AppDelegate.swift */; };
 		3FC2010122F0CFE600911608 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC2010022F0CFE600911608 /* MapViewController.swift */; };
 		3FC2010422F0CFE600911608 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FC2010222F0CFE600911608 /* Main.storyboard */; };
@@ -43,6 +49,12 @@
 /* Begin PBXFileReference section */
 		281D553D7D67E757F2A9C040 /* Pods_CourierTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CourierTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C752FB1186D6639187B8C58 /* Pods-CourierUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourierUITests.release.xcconfig"; path = "Target Support Files/Pods-CourierUITests/Pods-CourierUITests.release.xcconfig"; sourceTree = "<group>"; };
+		3F353AFE22FC0AF400BEBE61 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		3F353B0722FC15BC00BEBE61 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
+		3F353B0922FC16B100BEBE61 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3F353B0B22FC16D900BEBE61 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		3F353B0D22FD6A2500BEBE61 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		3F353B1022FD88E600BEBE61 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
 		3FC200FB22F0CFE600911608 /* Courier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Courier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FC200FE22F0CFE600911608 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FC2010022F0CFE600911608 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +109,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F353B0122FC0BF500BEBE61 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				3FC2010022F0CFE600911608 /* MapViewController.swift */,
+				3FC2010222F0CFE600911608 /* Main.storyboard */,
+				3F353B0D22FD6A2500BEBE61 /* MainViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		3F353B0222FC0D7900BEBE61 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				3F353B0722FC15BC00BEBE61 /* Auth.storyboard */,
+				3F353B0922FC16B100BEBE61 /* LoginViewController.swift */,
+				3F353B0B22FC16D900BEBE61 /* SignUpViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		3F353B0F22FD868400BEBE61 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				3F353B1022FD88E600BEBE61 /* BaseRouter.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
 		3FC200F222F0CFE600911608 = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				3FD3D33222FB630C003D98DA /* Path.swift */,
+				3F353AFE22FC0AF400BEBE61 /* User.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -167,6 +208,7 @@
 		3FD3D32F22F9C160003D98DA /* BusinessLogic */ = {
 			isa = PBXGroup;
 			children = (
+				3F353B0F22FD868400BEBE61 /* Navigation */,
 				3FD3D32B22F9BEF5003D98DA /* Database */,
 			);
 			path = BusinessLogic;
@@ -186,8 +228,8 @@
 		3FE2377322F0E450003BC736 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				3FC2010022F0CFE600911608 /* MapViewController.swift */,
-				3FC2010222F0CFE600911608 /* Main.storyboard */,
+				3F353B0222FC0D7900BEBE61 /* Auth */,
+				3F353B0122FC0BF500BEBE61 /* Main */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -351,6 +393,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F353B0822FC15BC00BEBE61 /* Auth.storyboard in Resources */,
 				3FC2010922F0CFE800911608 /* LaunchScreen.storyboard in Resources */,
 				3FC2010622F0CFE800911608 /* Assets.xcassets in Resources */,
 				3FC2010422F0CFE600911608 /* Main.storyboard in Resources */,
@@ -589,8 +632,13 @@
 				3FD3D33322FB630C003D98DA /* Path.swift in Sources */,
 				3FC2010122F0CFE600911608 /* MapViewController.swift in Sources */,
 				3FC200FF22F0CFE600911608 /* AppDelegate.swift in Sources */,
+				3F353B0A22FC16B100BEBE61 /* LoginViewController.swift in Sources */,
 				3FE2377922F10EA1003BC736 /* UIViewController+ext.swift in Sources */,
+				3F353B0C22FC16D900BEBE61 /* SignUpViewController.swift in Sources */,
+				3F353B1122FD88E600BEBE61 /* BaseRouter.swift in Sources */,
 				3FE2377722F0FFA6003BC736 /* Session.swift in Sources */,
+				3F353AFF22FC0AF400BEBE61 /* User.swift in Sources */,
+				3F353B0E22FD6A2500BEBE61 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
