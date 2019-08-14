@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+public protocol Authorizable {
+    func clearAuthFields()
+}
+
 // MARK: - Содержит методы, расширяющие UIViewController
 extension UIViewController {
     /// Выводит окно с ошибкой

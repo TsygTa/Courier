@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController, Authorizable {
 
     @IBOutlet var router: LoginRouter!
     
@@ -40,13 +40,29 @@ final class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.loginTextView.autocorrectionType = .no
+        
         let hideKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         self.view.addGestureRecognizer(hideKeyboardGesture)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        clearAuthFields()
+    }
+    
     @objc func hideKeyboard() {
         self.view.endEditing(true)
+    }
+}
+
+// MARK: - Расширение LoginViewController, реализующее протокол Authorizable
+extension LoginViewController {
+    /// Очищает поля авторизациии
+    func clearAuthFields() {
+        self.loginTextView.text = nil
+        self.passwordTextView.text = nil
     }
 }
 

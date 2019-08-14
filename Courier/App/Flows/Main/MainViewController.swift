@@ -39,5 +39,6 @@ final class MainRouter: BaseRouter {
     func logout() {
         let controller = UIStoryboard(name: "Auth", bundle: nil).instantiateViewController(LoginViewController.self)
         setAsRoot(UINavigationController(rootViewController: controller))
+        UserDefaults.standard.set(false, forKey: "isLogin")
     }
 }

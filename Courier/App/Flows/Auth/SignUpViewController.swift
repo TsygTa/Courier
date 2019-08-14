@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SignUpViewController: UIViewController {
+final class SignUpViewController: UIViewController, Authorizable {
     
     @IBOutlet weak var loginTextView: UITextField!
     
@@ -30,11 +30,21 @@ final class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.loginTextView.autocorrectionType = .no
         let hideKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         self.view.addGestureRecognizer(hideKeyboardGesture)
     }
     
     @objc func hideKeyboard() {
         self.view.endEditing(true)
+    }
+}
+
+// MARK: - Расширение SignUpViewController, реализующее протокол Authorizable
+extension SignUpViewController {
+    /// Очищает поля авторизациии
+    func clearAuthFields() {
+        self.loginTextView.text = nil
+        self.passwordTextView.text = nil
     }
 }
