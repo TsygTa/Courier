@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Controller-->
+        <scene sceneID="aCI-T4-VxH">
+            <objects>
+                <viewController storyboardIdentifier="MainViewController" id="61f-1n-r2F" customClass="MainViewController" customModule="Courier" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gH1-nN-jBe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sH-YR-inI">
+                                <rect key="frame" x="157" y="353" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="5DP-Nm-OP6"/>
+                                    <constraint firstAttribute="height" constant="30" id="5wA-BI-DXq"/>
+                                </constraints>
+                                <state key="normal" title="Show Map"/>
+                                <connections>
+                                    <action selector="showMap:" destination="61f-1n-r2F" eventType="touchUpInside" id="Z7n-WN-jn5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ttp-Ot-GGW">
+                                <rect key="frame" x="157" y="433" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="RHt-9e-D6k"/>
+                                    <constraint firstAttribute="width" constant="100" id="hnY-ED-Pak"/>
+                                </constraints>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logout:" destination="61f-1n-r2F" eventType="touchUpInside" id="qjS-UQ-fbY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ttp-Ot-GGW" firstAttribute="top" secondItem="8sH-YR-inI" secondAttribute="bottom" constant="50" id="I4X-n6-4hr"/>
+                            <constraint firstItem="ttp-Ot-GGW" firstAttribute="centerY" secondItem="gH1-nN-jBe" secondAttribute="centerY" id="bWR-UT-Of9"/>
+                            <constraint firstItem="ttp-Ot-GGW" firstAttribute="centerX" secondItem="gH1-nN-jBe" secondAttribute="centerX" id="bcH-l0-mF5"/>
+                            <constraint firstItem="8sH-YR-inI" firstAttribute="centerX" secondItem="gH1-nN-jBe" secondAttribute="centerX" id="vU4-ji-JVX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="YLW-Qf-1bd"/>
+                    </view>
+                    <connections>
+                        <outlet property="router" destination="v26-ol-mrA" id="GZX-a0-Hyz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ed3-Wl-fgv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="v26-ol-mrA" customClass="MainRouter" customModule="Courier" customModuleProvider="target">
+                    <connections>
+                        <outlet property="controller" destination="61f-1n-r2F" id="nPr-PE-q4b"/>
+                    </connections>
+                </customObject>
+            </objects>
+            <point key="canvasLocation" x="-1294" y="-4"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="MapViewController" id="BYZ-38-t0r" customClass="MapViewController" customModule="Courier" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aXP-us-nA9" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RHb-0f-06a">
+                                <rect key="frame" x="0.0" y="44" width="414" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="hnw-V0-yms"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem style="plain" id="gso-vx-75b">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zeJ-Nu-Qio">
+                                            <rect key="frame" x="20" y="5" width="76" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Start Track"/>
+                                            <connections>
+                                                <action selector="onStartTrackTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ugf-xV-ZvR"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" id="erF-rv-qXu">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Nv0-Td-aDv">
+                                            <rect key="frame" x="110" y="5" width="162" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="End Track"/>
+                                            <connections>
+                                                <action selector="onEndTrackTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jlB-wh-QRV"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" id="CxY-Ey-CH6">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Plz-Ev-bRV">
+                                            <rect key="frame" x="272" y="5" width="122" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Previous Track"/>
+                                            <connections>
+                                                <action selector="onPreviousTrackTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jMD-qT-2cB"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqd-xQ-ltU">
+                                <rect key="frame" x="348" y="344" width="56" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="JF4-UM-WW4"/>
+                                    <constraint firstAttribute="height" constant="56" id="UZm-6J-95i"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="map_zoom_in_button_icon" backgroundImage="map_button_background"/>
+                                <connections>
+                                    <action selector="onZoomInButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1vD-mM-92F"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DfA-lB-ata">
+                                <rect key="frame" x="348" y="420" width="56" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="6Oy-jj-Ry8"/>
+                                    <constraint firstAttribute="width" constant="56" id="oYA-fQ-7Bx"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="map_zoom_out_button_icon" backgroundImage="map_button_background"/>
+                                <connections>
+                                    <action selector="onZoomOutButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qvn-9p-aSh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="aXP-us-nA9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="29V-L4-zre"/>
+                            <constraint firstItem="RHb-0f-06a" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="BCE-dz-NYb"/>
+                            <constraint firstItem="aXP-us-nA9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Byx-wc-MJf"/>
+                            <constraint firstItem="oqd-xQ-ltU" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-76" id="Elq-3t-nl9"/>
+                            <constraint firstItem="RHb-0f-06a" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Oy0-Qh-GTo"/>
+                            <constraint firstItem="DfA-lB-ata" firstAttribute="trailing" secondItem="oqd-xQ-ltU" secondAttribute="trailing" id="XDa-z3-LdT"/>
+                            <constraint firstItem="oqd-xQ-ltU" firstAttribute="trailing" secondItem="DfA-lB-ata" secondAttribute="trailing" id="Z0F-z8-VMm"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aXP-us-nA9" secondAttribute="trailing" id="bin-Fr-Pqr"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="aXP-us-nA9" secondAttribute="bottom" id="eHT-bS-Cdl"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oqd-xQ-ltU" secondAttribute="trailing" constant="10" id="ucm-fe-A8p"/>
+                            <constraint firstItem="RHb-0f-06a" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="xXj-Bt-Ekt"/>
+                            <constraint firstItem="DfA-lB-ata" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="yT5-RR-Akb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="aXP-us-nA9" id="pbV-ie-l2f"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-568.1159420289855" y="-4.0178571428571423"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="map_button_background" width="65" height="65"/>
+        <image name="map_zoom_in_button_icon" width="65" height="65"/>
+        <image name="map_zoom_out_button_icon" width="65" height="65"/>
+    </resources>
+</document>
