@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class SignUpViewController: UIViewController, Authorizable {
     
     @IBOutlet weak var loginTextView: UITextField!
     
     @IBOutlet weak var passwordTextView: UITextField!
+    
+    @IBOutlet weak var signUpButton: UIButton!
     
     @IBAction func signUp(_ sender: Any) {
         
@@ -31,12 +35,27 @@ final class SignUpViewController: UIViewController, Authorizable {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loginTextView.autocorrectionType = .no
+        
+        configureSignUpBindings()
+        
         let hideKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         self.view.addGestureRecognizer(hideKeyboardGesture)
     }
     
     @objc func hideKeyboard() {
         self.view.endEditing(true)
+    }
+    
+    /// Конфигурирует кнопку регистрации
+    func configureSignUpBindings() {
+        Observable
+            .combineLatest(loginTextView.rx.text, passwordTextView.rx.text)
+            .map {login, password in
+                return !(login ?? "").isEmpty && (password ?? "").count >= 6
+            }
+            .bind { [weak signUpButton] inputFilled in
+                signUpButton?.isEnabled = inputFilled
+        }
     }
 }
 

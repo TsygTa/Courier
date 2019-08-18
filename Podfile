@@ -8,12 +8,16 @@ target 'Courier' do
   # Pods for Courier
   pod 'GoogleMaps'
   pod 'RealmSwift'
+  pod 'RxSwift'
+  pod 'RxCocoa'
 
   target 'CourierTests' do
     inherit! :search_paths
     # Pods for testing
     pod 'GoogleMaps'
     pod 'RealmSwift'
+    pod 'RxSwift'
+    pod 'RxCocoa'
   end
 
   target 'CourierUITests' do
@@ -21,6 +25,8 @@ target 'Courier' do
     # Pods for testing
     pod 'GoogleMaps'
     pod 'RealmSwift'
+    pod 'RxSwift'
+    pod 'RxCocoa'
   end
 
 end

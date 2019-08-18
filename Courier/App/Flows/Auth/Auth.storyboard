@@ -75,6 +75,7 @@
                         <viewLayoutGuide key="safeArea" id="fuJ-Ia-A5n"/>
                     </view>
                     <connections>
+                        <outlet property="loginButton" destination="Uti-W1-SeP" id="Oft-om-UHZ"/>
                         <outlet property="loginTextView" destination="eio-rU-R1C" id="Z4x-BV-iVx"/>
                         <outlet property="passwordTextView" destination="Nrs-c8-3WZ" id="67u-Kb-jv4"/>
                         <outlet property="router" destination="jbZ-74-e61" id="bKL-w4-TUh"/>
@@ -143,6 +144,7 @@
                     <connections>
                         <outlet property="loginTextView" destination="UAb-Ng-V8i" id="WH3-zM-W7s"/>
                         <outlet property="passwordTextView" destination="zmb-2R-7It" id="XFX-P5-bap"/>
+                        <outlet property="signUpButton" destination="LSZ-Vi-h0m" id="6Gi-hl-kHD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cke-KM-nk9" userLabel="First Responder" sceneMemberID="firstResponder"/>

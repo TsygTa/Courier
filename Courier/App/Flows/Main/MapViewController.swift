@@ -19,7 +19,7 @@ public class MapViewController: UIViewController {
     
     @IBOutlet private weak var mapView: GMSMapView!
     
-    private var locationManager: CLLocationManager?
+    private let locationManager = LocationManager.instance
     
     /// Обрабатывает нажатие на кнопку увелиичения масштаба карты
     @IBAction private func onZoomInButtonTap(_ sender: Any) {
@@ -44,7 +44,7 @@ public class MapViewController: UIViewController {
         self.routePath = GMSMutablePath()
         self.route?.map = self.mapView
         Session.instance.isMyLocationUpdating = true
-        locationManager?.startUpdatingLocation()
+        locationManager.startUpdatingLocation()
     }
     
     /// Обрабатывает нажатиие на кнопку Закончить трек
@@ -52,7 +52,7 @@ public class MapViewController: UIViewController {
         DatabaseService.deleteData(type: Path.self)
         DatabaseService.saveData(data: Path(path:self.routePath!))
         Session.instance.isMyLocationUpdating = false
-        locationManager?.stopUpdatingLocation()
+        locationManager.stopUpdatingLocation()
     }
     
     /// Обрабатывает нажатие на кнопку Отобразить предыдущий трек
@@ -60,7 +60,7 @@ public class MapViewController: UIViewController {
         if Session.instance.isMyLocationUpdating {
             self.showAlert(title: "Attention", message: "The current track will be finished", withCancel: true) { action in
                 Session.instance.isMyLocationUpdating = false
-                self.locationManager?.stopUpdatingLocation()
+                self.locationManager.stopUpdatingLocation()
                 self.drawPreviousPath()
             }
         } else {
@@ -93,6 +93,21 @@ public class MapViewController: UIViewController {
         super.viewDidLoad()
         self.configureMap()
         self.configureLocationManager()
+        self.navigationItem.hidesBackButton = true
+        let backButton = UIBarButtonItem(title: "< Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back(sender:)))
+        self.navigationItem.leftBarButtonItem = backButton
+    }
+
+    @objc func back(sender: UIBarButtonItem) {
+        if Session.instance.isMyLocationUpdating {
+            self.showAlert(title: "Attention", message: "The current track will be finished", withCancel: true) { action in
+                Session.instance.isMyLocationUpdating = false
+                self.locationManager.stopUpdatingLocation()
+                self.navigationController?.popViewController(animated: true)
+            }
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     /// Конфигурирует карту
@@ -105,35 +120,38 @@ public class MapViewController: UIViewController {
     
     /// Конфигурирует менеджер отслежииваниия местоположения
     private func configureLocationManager() {
-        locationManager = CLLocationManager()
-        locationManager?.allowsBackgroundLocationUpdates = true
-        locationManager?.pausesLocationUpdatesAutomatically = false
-        locationManager?.startMonitoringSignificantLocationChanges()
-        locationManager?.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        locationManager?.requestAlwaysAuthorization()
-        locationManager?.requestAlwaysAuthorization()
-        locationManager?.delegate = self
+        locationManager
+            .location
+            .asObservable()
+            .bind { [weak self] location in
+                guard Session.instance.isMyLocationUpdating,
+                    let location = location else { return }
+                
+                self?.routePath?.add(location.coordinate)
+                self?.route?.path = self?.routePath
+                let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: Session.instance.mapZoomLevel)
+                self?.mapView.animate(to: position)
+        }
     }
 }
 
-// MARK: - Содержит реализацию методов CLLocationManagerDelegate
-extension MapViewController: CLLocationManagerDelegate {
-    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard Session.instance.isMyLocationUpdating,
-            let location = locations.last else {return}
-        self.routePath?.add(location.coordinate)
-        self.route?.path = self.routePath
-        let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: Session.instance.mapZoomLevel)
-        mapView.animate(to: position)
-    }
-    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        self.showAlert(error: error)
-    }
-    
-    private func addMarker(coordinate: CLLocationCoordinate2D) {
-        let marker = GMSMarker(position: coordinate)
-        marker.map = self.mapView
-        mapView.animate(toLocation: coordinate)
-    }
-}
+//extension MapViewController: CLLocationManagerDelegate {
+//    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        guard Session.instance.isMyLocationUpdating,
+//            let location = locations.last else {return}
+//        self.routePath?.add(location.coordinate)
+//        self.route?.path = self.routePath
+//        let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: Session.instance.mapZoomLevel)
+//        mapView.animate(to: position)
+//    }
+//    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+//        self.showAlert(error: error)
+//    }
+//
+//    private func addMarker(coordinate: CLLocationCoordinate2D) {
+//        let marker = GMSMarker(position: coordinate)
+//        marker.map = self.mapView
+//        mapView.animate(toLocation: coordinate)
+//    }
+//}
 

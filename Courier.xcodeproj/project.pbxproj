@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1D51CA847CF8F39CED099DB9 /* Pods_CourierUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811A424EB1E3ED9784AA0D53 /* Pods_CourierUITests.framework */; };
+		3F21CB262309CCD10048C841 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F21CB252309CCD10048C841 /* LocationManager.swift */; };
 		3F353AFF22FC0AF400BEBE61 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F353AFE22FC0AF400BEBE61 /* User.swift */; };
 		3F353B0822FC15BC00BEBE61 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F353B0722FC15BC00BEBE61 /* Auth.storyboard */; };
 		3F353B0A22FC16B100BEBE61 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F353B0922FC16B100BEBE61 /* LoginViewController.swift */; };
@@ -49,6 +50,7 @@
 /* Begin PBXFileReference section */
 		281D553D7D67E757F2A9C040 /* Pods_CourierTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CourierTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C752FB1186D6639187B8C58 /* Pods-CourierUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourierUITests.release.xcconfig"; path = "Target Support Files/Pods-CourierUITests/Pods-CourierUITests.release.xcconfig"; sourceTree = "<group>"; };
+		3F21CB252309CCD10048C841 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		3F353AFE22FC0AF400BEBE61 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3F353B0722FC15BC00BEBE61 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		3F353B0922FC16B100BEBE61 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 			children = (
 				3FE2377622F0FFA6003BC736 /* Session.swift */,
 				3FE2377822F10EA1003BC736 /* UIViewController+ext.swift */,
+				3F21CB252309CCD10048C841 /* LocationManager.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -472,6 +475,9 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Courier/Pods-Courier-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -479,6 +485,9 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -496,6 +505,9 @@
 				"${PODS_ROOT}/Target Support Files/Pods-CourierTests/Pods-CourierTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -503,6 +515,9 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -608,6 +623,9 @@
 				"${PODS_ROOT}/Target Support Files/Pods-CourierUITests/Pods-CourierUITests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -615,6 +633,9 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -636,6 +657,7 @@
 				3FE2377922F10EA1003BC736 /* UIViewController+ext.swift in Sources */,
 				3F353B0C22FC16D900BEBE61 /* SignUpViewController.swift in Sources */,
 				3F353B1122FD88E600BEBE61 /* BaseRouter.swift in Sources */,
+				3F21CB262309CCD10048C841 /* LocationManager.swift in Sources */,
 				3FE2377722F0FFA6003BC736 /* Session.swift in Sources */,
 				3F353AFF22FC0AF400BEBE61 /* User.swift in Sources */,
 				3F353B0E22FD6A2500BEBE61 /* MainViewController.swift in Sources */,

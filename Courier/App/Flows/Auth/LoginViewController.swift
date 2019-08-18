@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class LoginViewController: UIViewController, Authorizable {
 
@@ -16,6 +18,7 @@ final class LoginViewController: UIViewController, Authorizable {
     
     @IBOutlet weak var passwordTextView: UITextField!
     
+    @IBOutlet weak var loginButton: UIButton!
     
     @IBAction func login(_ sender: Any) {
         
@@ -43,6 +46,8 @@ final class LoginViewController: UIViewController, Authorizable {
         
         self.loginTextView.autocorrectionType = .no
         
+        configureLoginBindings()
+        
         let hideKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         self.view.addGestureRecognizer(hideKeyboardGesture)
     }
@@ -54,6 +59,18 @@ final class LoginViewController: UIViewController, Authorizable {
     
     @objc func hideKeyboard() {
         self.view.endEditing(true)
+    }
+    
+    /// Конфигурирует кнопку входа
+    func configureLoginBindings() {
+        Observable
+            .combineLatest(loginTextView.rx.text, passwordTextView.rx.text)
+            .map {login, password in
+                return !(login ?? "").isEmpty && (password ?? "").count >= 6
+            }
+            .bind { [weak loginButton] inputFilled in
+                loginButton?.isEnabled = inputFilled
+            }
     }
 }
 
