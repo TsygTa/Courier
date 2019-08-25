@@ -49,8 +49,9 @@ public class MapViewController: UIViewController {
     
     /// Обрабатывает нажатиие на кнопку Закончить трек
     @IBAction private func onEndTrackTap(_ sender: Any) {
+        guard let path = self.routePath else { return }
         DatabaseService.deleteData(type: Path.self)
-        DatabaseService.saveData(data: Path(path:self.routePath!))
+        DatabaseService.saveData(data: Path(path:path))
         Session.instance.isMyLocationUpdating = false
         locationManager.stopUpdatingLocation()
     }

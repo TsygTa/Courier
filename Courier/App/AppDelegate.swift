@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var shield: UIView?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            guard granted else {
+                print("Разрешение на уведомления не получено")
+                return
+            }
+        }
         
         GMSServices.provideAPIKey("AIzaSyD547ofIG8E0Dj7CkUJzqfwHMSwLERqmY8")
         
@@ -44,6 +53,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             shield?.backgroundColor = UIColor.white.withAlphaComponent(0.9)
             currentVC.view.addSubview(shield!)
         }
+        self.sendNotificationRequest(content: self.makeNotificationContent(),
+                                     trigger: self.makeIntervalNotificationTrigger())
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -63,6 +74,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        self.sendNotificationRequest(content: self.makeNotificationContent(),
+                                     trigger: self.makeIntervalNotificationTrigger())
     }
 }
 
+// MARK: - Реализует настройки уведомлений
+extension AppDelegate {
+    private func makeNotificationContent() -> UNNotificationContent {
+        let content = UNMutableNotificationContent()
+        content.title = "Courier App"
+        content.subtitle = "Message"
+        content.body = "Return to the Application"
+        content.badge = 4
+        return content
+    }
+    
+    private func makeIntervalNotificationTrigger() ->UNNotificationTrigger {
+        return UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: false)
+    }
+    
+    private func sendNotificationRequest(content: UNNotificationContent,
+                                         trigger: UNNotificationTrigger) {
+        let request = UNNotificationRequest(identifier: "AlarmMassege", content: content, trigger: trigger)
+        let center = UNUserNotificationCenter.current()
+        center.add(request) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+}
