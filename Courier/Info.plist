@@ -20,9 +20,19 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>for example</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>for example</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>for example</string>
+	<key>NSCameraUsageDescription</key>
+	<string>for selfie</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
