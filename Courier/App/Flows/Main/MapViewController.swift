@@ -16,6 +16,8 @@ public class MapViewController: UIViewController {
     
     private var route: GMSPolyline?
     private var routePath: GMSMutablePath?
+    private var selfieImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+    private var marker: GMSMarker?
     
     @IBOutlet private weak var mapView: GMSMapView!
     
@@ -54,6 +56,7 @@ public class MapViewController: UIViewController {
         DatabaseService.saveData(data: Path(path:path))
         Session.instance.isMyLocationUpdating = false
         locationManager.stopUpdatingLocation()
+        self.removeMarker()
     }
     
     /// Обрабатывает нажатие на кнопку Отобразить предыдущий трек
@@ -76,6 +79,7 @@ public class MapViewController: UIViewController {
             let path = GMSMutablePath(fromEncodedPath: encodedPath) else { return }
         
         self.route?.map = nil
+        self.removeMarker()
 
         self.routePath = path
         self.route = GMSPolyline(path: path)
@@ -97,6 +101,15 @@ public class MapViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
         let backButton = UIBarButtonItem(title: "< Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back(sender:)))
         self.navigationItem.leftBarButtonItem = backButton
+        
+        self.selfieImageView.layer.cornerRadius = self.selfieImageView.frame.size.width/2
+        self.selfieImageView.layer.masksToBounds = true
+    }
+    
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.selfieImageView.image = PhotoService.getPhoto()
     }
 
     @objc func back(sender: UIBarButtonItem) {
@@ -127,32 +140,25 @@ public class MapViewController: UIViewController {
             .bind { [weak self] location in
                 guard Session.instance.isMyLocationUpdating,
                     let location = location else { return }
-                
+                self?.removeMarker()
+                self?.addMarker(coordinate: location.coordinate)
                 self?.routePath?.add(location.coordinate)
                 self?.route?.path = self?.routePath
                 let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: Session.instance.mapZoomLevel)
                 self?.mapView.animate(to: position)
         }
     }
+    
+    private func addMarker(coordinate: CLLocationCoordinate2D) {
+        let marker = GMSMarker(position: coordinate)
+        marker.iconView = self.selfieImageView
+        marker.map = self.mapView
+        self.marker = marker
+    }
+    
+    private func removeMarker() {
+        marker?.map = nil
+        marker = nil
+    }
 }
-
-//extension MapViewController: CLLocationManagerDelegate {
-//    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        guard Session.instance.isMyLocationUpdating,
-//            let location = locations.last else {return}
-//        self.routePath?.add(location.coordinate)
-//        self.route?.path = self.routePath
-//        let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: Session.instance.mapZoomLevel)
-//        mapView.animate(to: position)
-//    }
-//    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-//        self.showAlert(error: error)
-//    }
-//
-//    private func addMarker(coordinate: CLLocationCoordinate2D) {
-//        let marker = GMSMarker(position: coordinate)
-//        marker.map = self.mapView
-//        mapView.animate(toLocation: coordinate)
-//    }
-//}
 

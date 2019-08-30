@@ -22,6 +22,10 @@ class MainViewController: UIViewController {
         router.logout()
     }
     
+    @IBAction func takePicture(_ sender: Any) {
+        router.toSelfie()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,5 +44,10 @@ final class MainRouter: BaseRouter {
         let controller = UIStoryboard(name: "Auth", bundle: nil).instantiateViewController(LoginViewController.self)
         setAsRoot(UINavigationController(rootViewController: controller))
         UserDefaults.standard.set(false, forKey: "isLogin")
+    }
+    
+    func toSelfie() {
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(SelfieViewController.self)
+        show(controller)
     }
 }

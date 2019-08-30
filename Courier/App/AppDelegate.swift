@@ -91,7 +91,7 @@ extension AppDelegate {
     }
     
     private func makeIntervalNotificationTrigger() ->UNNotificationTrigger {
-        return UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: false)
+        return UNTimeIntervalNotificationTrigger(timeInterval: 1800, repeats: false)
     }
     
     private func sendNotificationRequest(content: UNNotificationContent,

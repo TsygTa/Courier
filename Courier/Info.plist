@@ -26,6 +26,8 @@
 	<string>for example</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>for example</string>
+	<key>NSCameraUsageDescription</key>
+	<string>for selfie</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
